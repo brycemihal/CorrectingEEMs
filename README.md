@@ -6,16 +6,17 @@ Last Edit: 6/17/2015
 
 1.	Data Needed
 •	For each integration time (try to follow naming conventions):
-o	BlankYYMMDD (##) – Processed Graph_ RM.dat
-o	RSUYYMMDD (##) – Raman Area Graph.dat
-o	BlankYYMMDD05 (##) – Processed Graph_ RM.dat
-o	RSUYYMMDD (##) – Raman Area Graph.dat
-o	BlankYYMMDD25 (##) – Processed Graph_ RM.dat
-o	RSUYYMMDD25 (##) – Raman Area Graph.dat
+  o	BlankYYMMDD (##) – Processed Graph_ RM.dat
+  o	RSUYYMMDD (##) – Raman Area Graph.dat
+  o	BlankYYMMDD05 (##) – Processed Graph_ RM.dat
+  o	RSUYYMMDD (##) – Raman Area Graph.dat
+  o	BlankYYMMDD25 (##) – Processed Graph_ RM.dat
+  o	RSUYYMMDD25 (##) – Raman Area Graph.dat
+
 •	For each sample to be corrected:
-o	SAMPLENAME (##) – Note.txt
-o	SAMPLENAME (##) – Abs Spectra Graphs.dat
-o	SAMPLENAME (##) – Processed Graphs_ RM.dat
+  o	SAMPLENAME (##) – Note.txt
+  o	SAMPLENAME (##) – Abs Spectra Graphs.dat
+  o	SAMPLENAME (##) – Processed Graphs_ RM.dat
 
 2.	Exporting Data
 •	Blank and RSU files
