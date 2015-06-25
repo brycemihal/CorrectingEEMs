@@ -11,21 +11,22 @@
 % 370 plot. Added known/theoretical fluorescence peaks to plot. Added peak
 % intensity identifier (grean plus) to the plot.
 % 6/17/15 - Added the export of emPeak and exPeak to the function.
+% 6/25/15 - Changed the matrix's to accept multiple row lengths
 
 function [FI, maxEm, BIX, TC,emPeak,exPeak] = funEEMsCorrections(Afile, ifile, uvfile, bfile, rfile, dilution_factor, uvlength, correctedpath)
 % all of the emission values
 % % em = [239.515,241.097,242.681,244.264,245.849,247.434,249.02,250.606,252.193,253.781,255.37,256.959,258.549,260.139,261.73,263.322,264.914,266.507,268.101,269.696,271.291,272.886,274.483,276.079,277.677,279.275,280.874,282.474,284.074,285.675,287.276,288.87,290.481,292.084,293.688,295.292,296.898,298.503,300.11,301.717,303.324,304.932,306.541,308.151,309.761,311.371,312.983,314.594,316.207,317.82,319.433,321.048,322.662,324.278,325.894,327.51,329.127,330.745,332.363,333.982,335.602,337.222,338.842,340.463,342.085,343.707,345.33,346.954,348.578,350.202,351.827,353.453,355.079,356.706,358.333,359.961,361.589,363.218,364.847,366.477,368.108,369.739,371.37,373.003,374.635,376.268,377.902,379.536,381.171,382.806,384.442,386.078,387.715,389.352,390.99,392.628,394.267,395.906,397.546,399.186,400.827,402.468,404.11,405.752,407.394,409.038,410.681,412.325,413.97,415.615,417.26,418.906,420.553,422.2,423.847,425.495,427.143,428.792,430.441,432.091,433.741,435.391,437.042,438.694,440.346,441.998,443.651,445.304,446.957,448.611,450.266,451.921,453.576,455.232,456.888,458.544,460.201,461.859,463.516,465.175,466.833,468.492,470.151,471.811,473.471,475.132,476.793,478.454,480.116,481.778,483.44,485.103,486.766,488.429,490.093,491.758,493.422,495.087,496.753,498.418,500.084,501.751,503.417,505.084,506.752,508.42,510.088,511.756,513.425,515.094,516.763,518.433,520.103,521.774,523.444,525.115,526.787,528.458,530.13,531.803,533.475,535.148,536.821,538.495,540.168,541.842,543.517,545.191,546.866,548.541,550.217,551.892,553.568,555.244,556.921,558.598,560.275,561.952,563.629,565.307,566.985,568.664,570.342,572.021,573.7,575.379,577.058,578.738,580.418,582.098,583.779,585.459,587.14,588.821,590.502,592.184,593.865,595.547,597.229,598.911,600.594,602.276,603.959,605.642,607.325,609.009,610.692,612.376,614.06,615.744,617.428,619.113,620.797]
 
 %emission values to 550
-% em = [250.229,254.716,259.208,263.703,268.202,272.705,277.211,281.721,286.234,290.752,295.273,299.797,304.325,308.856,313.392,317.93,322.472,327.018,331.567,336.119,340.675,345.234,349.796,354.362,358.931,363.504,368.079,372.658,377.241,381.826,386.415,391.007,395.601,400.2,404.801,409.405,414.012,418.623,423.236,427.852,432.472,437.094,441.719,446.347,450.978,455.612,460.248,464.888,469.53,474.175,478.823,483.473,488.126,492.782,497.44,502.101,506.765,511.431,516.1,520.771,525.445,530.121,534.8,539.48,544.164,548.85,553.538,558.228,562.921,567.616,572.313,577.012,581.714,586.417,591.123,595.831,600.541,605.253,609.967,614.683,619.401,624.12,628.842,633.566,638.291,643.019,647.748,652.479,657.211,661.946,666.682,671.419,676.158,680.899,685.642,690.386,695.131,699.878,704.627,709.376,714.128,718.88,723.634,728.389,733.146,737.903,742.662,747.422,752.184,756.946,761.71,766.474,771.24,776.006,780.774,785.542,790.312,795.082,799.853,804.625,809.398,814.171,818.945,823.72,828.496];
+em = [250.229,254.716,259.208,263.703,268.202,272.705,277.211,281.721,286.234,290.752,295.273,299.797,304.325,308.856,313.392,317.93,322.472,327.018,331.567,336.119,340.675,345.234,349.796,354.362,358.931,363.504,368.079,372.658,377.241,381.826,386.415,391.007,395.601,400.2,404.801,409.405,414.012,418.623,423.236,427.852,432.472,437.094,441.719,446.347,450.978,455.612,460.248,464.888,469.53,474.175,478.823,483.473,488.126,492.782,497.44,502.101,506.765,511.431,516.1,520.771,525.445,530.121,534.8,539.48,544.164,548.85,553.538,558.228,562.921,567.616,572.313,577.012,581.714,586.417,591.123,595.831,600.541,605.253,609.967,614.683,619.401,624.12,628.842,633.566,638.291,643.019,647.748,652.479,657.211,661.946,666.682,671.419,676.158,680.899,685.642,690.386,695.131,699.878,704.627,709.376,714.128,718.88,723.634,728.389,733.146,737.903,742.662,747.422,752.184,756.946,761.71,766.474,771.24,776.006,780.774,785.542,790.312,795.082,799.853,804.625,809.398,814.171,818.945,823.72,828.496];
 %em = em(1:125);
 
 
-eemdata = importdata(Afile);
-em = eemdata.rowheaders(2:length(eemdata.rowheaders))';
-ex = eemdata.data(1,:);
+% eemdata = importdata(Afile);
+% em = eemdata.rowheaders(2:length(eemdata.rowheaders))';
+% ex = eemdata.data(1,:);
 
-% ex = 830:-2:248;
+ex = 830:-2:248;
 emlen = length(em);
 exlen = length(ex);%These must be updated before you start to be your wavelength ranges and increments
 
@@ -69,7 +70,7 @@ A = importdata(char(Afile));  % Reads in raw EEM file that has been exported usi
 % Changed 127 to length(A.data(:,1)) on 5/28/15
 % Changed length(A.data(:,1)) back to 127 on 6/10/15
 % textlengthofdata = length(A.data(:,1));
-A = A.data(3:127,:); %Use 251 if you have a larger excitation range that covers the entire emission range.
+A = A.data(3:length(A.data(:,1)),:); %Use 251 if you have a larger excitation range that covers the entire emission range.
 
 abs = importdata(char(uvfile));  % Reads in the UV absorance file that has been transferred to a csv file format using UVChemStation.
 %abs254 = abs.data(123,10);
@@ -102,7 +103,7 @@ end
 % Changed 125 to length(A(:,1)) on 5/28/15
 % Changed length(A(:,1)) back to 125 on 6/10/15
 % textlengthofdata2 = length(A(:,1));
-AforIFC = A(1:125,:);%A(1:161,:)
+AforIFC = A(1:length(A(:,1)),:);%A(1:161,:)
 Aci = AforIFC.*10.^(0.5*IFC);
 
 %Aci(162:173,:) = A(162:173,:);%Adding back in data with no IFC
@@ -114,27 +115,27 @@ Acir = Aci/RamanArea; %This raman normalizes the instrument and IFE corrected EE
 % only has one in this case). Added following if statement on 5/29/15.
 % Add a row of zeros to the top of Acir if it is not 125 rows long
 % 6/10/15 - removed section of code. I was exporting the wrong aqualog file
-% % if length(Acir(:,1)) == 125
-% % else
-% %     % find the length of the existing array
-% %     numRows = length(Acir(:,1));
-% %     numColumns = length(Acir(1,:));
-% %     %Create singel row # of columns in Acir
-% %     newRow = zeros(1,numColumns);
-% %     % create a new array of length + 1
-% %     newArray = zeros(numRows+1,numColumns);
-% %     % start a for loop to relocate each existing row to one lower.
-% %     j = 1;
-% %     for i = 1:numRows
-% %         if i == 1
-% %             newArray(j,:) = newRow;
-% %             j = i+1;
-% %         end
-% %         newArray(j,:) = Acir(i,:);
-% %         j = j+1;
-% %     end
-% %     Acir = newArray;
-% % end
+if length(Acir(:,1)) == 125
+else
+    % find the length of the existing array
+    numRows = length(Acir(:,1));
+    numColumns = length(Acir(1,:));
+    %Create singel row # of columns in Acir
+    newRow = zeros(1,numColumns);
+    % create a new array of length + 1
+    newArray = zeros(numRows+1,numColumns);
+    % start a for loop to relocate each existing row to one lower.
+    j = 1;
+    for i = 1:numRows
+        if i == 1
+            newArray(j,:) = newRow;
+            j = i+1;
+        end
+        newArray(j,:) = Acir(i,:);
+        j = j+1;
+    end
+    Acir = newArray;
+end
 Asub = Acir - Brc; %This blank subtracts the corrected EEM file.
 
 Adil = Asub*dilution_factor/uvlength; %This applies the dillution factor normalization.

@@ -79,9 +79,9 @@ for n = 1:textlen
    
     SampleName = ifile(1:strfind(ifile,'(')-2);
     
-    % Return the emission row at the wavelength of 254nm for SUVA254 analysis
-    suvaData = importdata(uvfile,' ',1000);
-    r254{n,1} = strsplit(char(suvaData(292)),'\t');
+%     % Return the emission row at the wavelength of 254nm for SUVA254 analysis
+%     suvaData = importdata(uvfile,' ',1000);
+%     r254{n,1} = strsplit(char(suvaData(292)),'\t');
     
     fprintf('Progress: %3.0f of %3.0f\n',n,textlen)
     
@@ -90,23 +90,23 @@ for n = 1:textlen
 end
 fclose(fid);
 
-%Save the SUVA data into a new file
-fileName = sprintf('SUVA254_%s.txt',dateRan); %output file
-fid = fopen(char(fileName), 'wt'); 
-fprintf(fid, '%s\t %s\t %s\t %s\t %s\t %s\t %s\t %s\t %s\t',...
-    'Wavelength','Abs Detector Raw','Ref Detector Raw', ...
-    'Linear interp','Dark subtracted Abs Detector', ...
-    'Corrected Ref Detector','Corrected Intensity','-Log(T)', ...
-    '% Transmittance')
-
-fprintf(fid,'\n')
-for i = 1:length(r254(:,1))
-    for j = 1:length(r254{1})  
-        fprintf(fid, '%s\t', char(r254{i}(j)));
-    end
-    fprintf(fid,'\n');
-end
-fclose(fid);
+% %Save the SUVA data into a new file
+% fileName = sprintf('SUVA254_%s.txt',dateRan); %output file
+% fid = fopen(char(fileName), 'wt'); 
+% fprintf(fid, '%s\t %s\t %s\t %s\t %s\t %s\t %s\t %s\t %s\t',...
+%     'Wavelength','Abs Detector Raw','Ref Detector Raw', ...
+%     'Linear interp','Dark subtracted Abs Detector', ...
+%     'Corrected Ref Detector','Corrected Intensity','-Log(T)', ...
+%     '% Transmittance')
+% 
+% fprintf(fid,'\n')
+% for i = 1:length(r254(:,1))
+%     for j = 1:length(r254{1})  
+%         fprintf(fid, '%s\t', char(r254{i}(j)));
+%     end
+%     fprintf(fid,'\n');
+% end
+% fclose(fid);
 
 fprintf('All done!\n');
 
