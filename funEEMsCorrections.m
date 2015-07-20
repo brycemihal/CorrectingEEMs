@@ -82,9 +82,7 @@ data = abs.data(:,10);
 ex_abs = data;  %%% Absorbance values
 
 % BAM - Getting an error b/c length of A = 124 not 125.
-% Changed 125 to length(A(:,1)) on 5/29/15
-% Changed length(A(:,1)) back to 125 on 6/10/15
-emforIFC = em(1:125);
+emforIFC = em(1:124);
 em_data = flipud(data);
 em_abs = interp1(waves,em_data,emforIFC);  %%% Interp for the Abosorbance every 2 nm, 
     %%results in interpolated Abs
@@ -100,10 +98,7 @@ end
 %contourf(IFC)
 %figure; contourf(A)
 % BAM - Getting an error b/c length of A = 124 not 125.
-% Changed 125 to length(A(:,1)) on 5/28/15
-% Changed length(A(:,1)) back to 125 on 6/10/15
-% textlengthofdata2 = length(A(:,1));
-AforIFC = A(1:length(A(:,1)),:);%A(1:161,:)
+AforIFC = A(1:124,:);%A(1:161,:)
 Aci = AforIFC.*10.^(0.5*IFC);
 
 %Aci(162:173,:) = A(162:173,:);%Adding back in data with no IFC
@@ -114,7 +109,6 @@ Acir = Aci/RamanArea; %This raman normalizes the instrument and IFE corrected EE
 % zeros needs to be added in this case (Blank has two rows of zeros and Acir 
 % only has one in this case). Added following if statement on 5/29/15.
 % Add a row of zeros to the top of Acir if it is not 125 rows long
-% 6/10/15 - removed section of code. I was exporting the wrong aqualog file
 if length(Acir(:,1)) == 125
 else
     % find the length of the existing array
