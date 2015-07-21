@@ -256,15 +256,15 @@ plot(exPeak,emPeak,'ok','MarkerSize',8)
 % Source: USGS Organic Mater Research; http://or.water.usgs.gov/proj/carbon/EEMS.html
 hold on
 %  text(em,ex,identifier)
-text(270,306,'B') %Tyrosine like-protein like, associated with autochthonous OM
-text(270,340,'T') %Tryptophan-like, protein like, associated with phytoplankton 
+text(306,270,'B') %Tyrosine like-protein like, associated with autochthonous OM
+text(340,270,'T') %Tryptophan-like, protein like, associated with phytoplankton 
 % productivity and has been associated with wastewater
-text(260,450,'A') %Humic-like
-text(300,390,'M/N') %Humic like, possibly marine, possible microbial reprocessing, 
+text(450,260,'A') %Humic-like
+text(390,300,'M/N') %Humic like, possibly marine, possible microbial reprocessing, 
 % more labile humic acids
-text(340,440,'C') %Humic-like, terrestrial, wide spread
-text(390,510,'D') %soil fulvic acid
-text(370,460,'FDOM') %In-Situ fluorescence that is highly correleated to DOC concentrations
+text(440,340,'C') %Humic-like, terrestrial, wide spread
+text(510,390,'D') %soil fulvic acid
+text(460,370,'FDOM') %In-Situ fluorescence that is highly correleated to DOC concentrations
 
 %maxEm = em(emlen-(find(A(ex370, :) == max(A(ex370, :)))));
 maxEm = em((find(A(ex370, :) == max(A(ex370, :)))));
